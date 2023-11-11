@@ -1,0 +1,19 @@
+class Solution {
+public:
+    int climbStairs(int n) {
+        int a = 1, b = 2, c, ans;
+        if(n<=2)
+        {
+            return n;
+        }
+        while(n>2)
+        {
+            c = a + b;
+            ans = c;
+            a = b;
+            b = c;
+            n--;
+        }
+        return ans;
+    }
+};
