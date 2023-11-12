@@ -1,0 +1,31 @@
+class Solution {
+public:
+    int trap(vector<int>& height) {
+        int n = height.size();
+        if (n <= 2) {
+            return 0; // Trapping rainwater is not possible with less than 3 elements.
+        }
+        vector<int> max_left(n);
+        vector<int> max_right(n);
+        int ans = 0;
+        
+       max_left[0] = height[0];
+        for (int i = 1; i < n; i++) {
+            max_left[i] = max(max_left[i - 1], height[i - 1]);
+        }
+        max_right[n - 1] = height[n - 1];
+        for (int j = n - 2; j >= 0; j--) {
+            max_right[j] = std::max(max_right[j + 1], height[j + 1]);
+        }
+        for(int k=0; k<n; k++)
+        {
+            int diff = 0;
+            diff = min(max_left[k], max_right[k]) - height[k];
+            if(diff>0)
+            {
+                ans = ans + diff;
+            }
+        }
+        return ans;
+    }
+};
